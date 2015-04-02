@@ -9,7 +9,7 @@ package pm.model;
  *
  * @author dhca
  */
-public class Pesquisador {
+public abstract class Pesquisador {
     //Acho que é assim que se usa enum
     public enum Titulacao {
         G, D, M
@@ -86,6 +86,9 @@ public class Pesquisador {
         this.num_D_orient = num_D_orient;
     }
     
+    
+    // Metodos a serem implementados
+    public abstract void popularidadePesquisador(Pesquisador p);
     
     
 }
