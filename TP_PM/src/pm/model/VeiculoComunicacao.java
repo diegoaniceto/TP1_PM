@@ -9,7 +9,7 @@ package pm.model;
  *
  * @author dhca
  */
-public class Veiculo {
+public class VeiculoComunicacao {
     
     //Enumeração dos tipos de Veiculos de publicação
     // R => Revista
