@@ -9,20 +9,16 @@ import java.util.Collection;
 public class ClasseTempParaTestes {
 	
 	private static String PATH = "testes-alunos/testes_15pesquisadores/entrada/";
-	
 	public static void main(String[] args) {
 		Collection<String> list = new ArrayList<String>();
 		
 		try{
 			FileReader arq = new FileReader(PATH + "pesquisadores.txt");
 			BufferedReader lerArq = new BufferedReader(arq);
-			
-			String linha = lerArq.readLine();//le a primeira linha do arquivo
-			list.add(linha);
-			
+			String linha = lerArq.readLine();
 			while(linha != null){
-				linha = lerArq.readLine();
 				list.add(linha);
+				linha = lerArq.readLine();
 			}
 			
 			arq.close();
@@ -37,14 +33,12 @@ public class ClasseTempParaTestes {
 		
 		for (String elemento : list) {
 			c = elemento.split(";");
-			if(c != null){
-				for (int i = 0; i < c.length; i++) {
-					String string = c[i];
-					System.out.print(string + " ");
-				}
+			for (int i = 0; i < c.length; i++) {
+				String string = c[i];
+				System.out.print(string + " ");
 			}
-			
 			System.out.println("");
 		}
 	}
+
 }
