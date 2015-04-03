@@ -12,10 +12,10 @@ package pm.model;
 public class VeiculoComunicacao {
   
     
-    private int idVeiculo;
-    private char tipoVeiculo;
+    private String idVeiculo;
+    private String tipoVeiculo;
     
-	public VeiculoComunicacao(int idVeiculo, char tipoVeiculo) {
+	public VeiculoComunicacao(String idVeiculo, String tipoVeiculo) {
 		this.idVeiculo = idVeiculo;
 		this.tipoVeiculo = tipoVeiculo;
 	}
@@ -25,11 +25,11 @@ public class VeiculoComunicacao {
      * 
      *********************/
    
-	public int getIdVeiculo() {
+	public String getIdVeiculo() {
 		return idVeiculo;
 	}
 
-	public char getTipoVeiculo() {
+	public String getTipoVeiculo() {
 		return tipoVeiculo;
 	}
 
