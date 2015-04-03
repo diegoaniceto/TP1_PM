@@ -1,5 +1,10 @@
 package pm.main;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import pm.model.Pesquisador;
+
 /**
  *
  * @author dhca
@@ -7,7 +12,8 @@ package pm.main;
 public class MainClass {
 
 	public static void main(String args[]) {
-    	System.out.println("Teste");
-        System.out.println("Dieguin eh alcoolatra");
+    	Collection<Pesquisador> pesquisadores = new ArrayList<Pesquisador>();
+//    	for(Pesquisador pesquisador : pesquisadores){
+//    	}
     }
 }
