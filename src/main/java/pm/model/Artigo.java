@@ -5,10 +5,22 @@
  */
 package pm.model;
 
-/**
- *
- * @author dhca
- */
 public class Artigo {
+    private String idArtigo;
+    private String veiculoComunicacaoId;
+    
+	public Artigo(String idArtigo, String veiculoComunicacaoId) {
+		this.idArtigo = idArtigo;
+		this.veiculoComunicacaoId = veiculoComunicacaoId;
+	}
+
+	public String getIdArtigo() {
+		return idArtigo;
+	}
+
+	public String getVeiculoComunicacaoId() {
+		return veiculoComunicacaoId;
+	}
+    
     
 }

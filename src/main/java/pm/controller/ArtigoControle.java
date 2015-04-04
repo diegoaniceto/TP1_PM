@@ -17,6 +17,7 @@ public class ArtigoControle {
 	 * como parametro e é criada uma lista de artigos
 	 */
 	public ArtigoControle(String caminhoArquivoEntrada){
+		//Passar o arquivo artigo_veiculos.txt
 		this.caminhoArquivoEntrada = caminhoArquivoEntrada;
 		criarListaArtigos();
 	}
@@ -43,7 +44,7 @@ public class ArtigoControle {
 		
 		for (String elemento : dadosArquivo) {
 			tk = elemento.split(";");
-			Artigo p = new Artigo(/*A implementar*/);
+			Artigo p = new Artigo(tk[0],tk[1]);
 			listaArtigos.add(p);
 		}
 	}
