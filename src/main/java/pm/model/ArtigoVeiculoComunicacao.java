@@ -5,11 +5,11 @@
  */
 package pm.model;
 
-public class Artigo {
+public class ArtigoVeiculoComunicacao {
     private String idArtigo;
     private String veiculoComunicacaoId;
     
-	public Artigo(String idArtigo, String veiculoComunicacaoId) {
+	public ArtigoVeiculoComunicacao(String idArtigo, String veiculoComunicacaoId) {
 		this.idArtigo = idArtigo;
 		this.veiculoComunicacaoId = veiculoComunicacaoId;
 	}

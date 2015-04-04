@@ -6,17 +6,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import pm.model.Artigo;
+import pm.model.ArtigoVeiculoComunicacao;
 
-public class ArtigoControle {
-	private Collection<Artigo> listaArtigos;
+public class ArtigoVeiculoComunicacaoControle {
+	private Collection<ArtigoVeiculoComunicacao> listaArtigos;
 	private String caminhoArquivoEntrada = "";
 	
 	/*
 	 * Construtor da classe recebe um caminho para arquivo
 	 * como parametro e é criada uma lista de artigos
 	 */
-	public ArtigoControle(String caminhoArquivoEntrada){
+	public ArtigoVeiculoComunicacaoControle(String caminhoArquivoEntrada){
 		//Passar o arquivo artigo_veiculos.txt
 		this.caminhoArquivoEntrada = caminhoArquivoEntrada;
 		criarListaArtigos();
@@ -44,7 +44,7 @@ public class ArtigoControle {
 		
 		for (String elemento : dadosArquivo) {
 			tk = elemento.split(";");
-			Artigo p = new Artigo(tk[0],tk[1]);
+			ArtigoVeiculoComunicacao p = new ArtigoVeiculoComunicacao(tk[0],tk[1]);
 			listaArtigos.add(p);
 		}
 	}
@@ -52,20 +52,19 @@ public class ArtigoControle {
 	/*
 	 * retorna lista de artigos
 	 */
-	public Collection<Artigo> getListaArtigos(){
+	public Collection<ArtigoVeiculoComunicacao> getListaArtigos(){
 		return listaArtigos;
 	}
 	
 	/*
 	 * retorna artigo por ID
 	 */
-	public Artigo getArtigoById(String id){
-		/*A Implementar*/
-//		for (Artigo artigo : listaArtigos) {
-//			if(artigo.getIdArtigo().contentEquals(id)){
-//				return artigo;
-//			}
-//		}
+	public ArtigoVeiculoComunicacao getArtigoById(String id){
+		for (ArtigoVeiculoComunicacao artigo : listaArtigos) {
+			if(artigo.getIdArtigo().contentEquals(id)){
+				return artigo;
+			}
+		}
 		return null;
 	}
 }
