@@ -10,40 +10,27 @@ package pm.model;
  * @author dhca
  */
 public class VeiculoComunicacao {
+  
     
-    //Enumeração dos tipos de Veiculos de publicação
-    // R => Revista
-    // C => COnferencia
-    public enum Tipo_Veiculo {
-        R, C
-    }
+    private String idVeiculo;
+    private String tipoVeiculo;
     
-    private int idVeiculo;
-    private Tipo_Veiculo tv;
+	public VeiculoComunicacao(String idVeiculo, String tipoVeiculo) {
+		this.idVeiculo = idVeiculo;
+		this.tipoVeiculo = tipoVeiculo;
+	}
 
-    /*********************
+   /*********************
      * Metodos de Acesso
      * 
      *********************/
-    
-    public int getIdVeiculo() {
-        return idVeiculo;
-    }
+   
+	public String getIdVeiculo() {
+		return idVeiculo;
+	}
 
-    public void setIdVeiculo(int idVeiculo) {
-        this.idVeiculo = idVeiculo;
-    }
+	public String getTipoVeiculo() {
+		return tipoVeiculo;
+	}
 
-    public Tipo_Veiculo getTv() {
-        return tv;
-    }
-
-    public void setTv(Tipo_Veiculo tv) {
-        this.tv = tv;
-    }
-    
-    
-
-    
-    
 }

@@ -6,22 +6,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import pm.model.VeiculoComunicacao;
+import pm.model.ArtigoVeiculoComunicacao;
 
-public class VeiculoComunicacaoControle {
-	private Collection<VeiculoComunicacao> listaVeiculoComunicacao;
+public class ArtigoVeiculoComunicacaoControle {
+	private Collection<ArtigoVeiculoComunicacao> listaArtigos;
 	private String caminhoArquivoEntrada = "";
 	
 	/*
 	 * Construtor da classe recebe um caminho para arquivo
-	 * como parametro e é criada uma lista de VeiculoComunicacao
+	 * como parametro e é criada uma lista de artigos
 	 */
-	public VeiculoComunicacaoControle(String caminhoArquivoEntrada){
+	public ArtigoVeiculoComunicacaoControle(String caminhoArquivoEntrada){
+		//Passar o arquivo artigo_veiculos.txt
 		this.caminhoArquivoEntrada = caminhoArquivoEntrada;
-		criarListaVeiculoComunicacao();
+		criarListaArtigos();
 	}
 	
-	private void criarListaVeiculoComunicacao(){
+	private void criarListaArtigos(){
 		Collection<String> dadosArquivo = new ArrayList<String>();
 		try{
 			FileReader arq = new FileReader(caminhoArquivoEntrada);
@@ -43,25 +44,25 @@ public class VeiculoComunicacaoControle {
 		
 		for (String elemento : dadosArquivo) {
 			tk = elemento.split(";");
-			VeiculoComunicacao p = new VeiculoComunicacao(tk[0], tk[1]);
-			listaVeiculoComunicacao.add(p);
+			ArtigoVeiculoComunicacao p = new ArtigoVeiculoComunicacao(tk[0],tk[1]);
+			listaArtigos.add(p);
 		}
 	}
 	
 	/*
-	 * retorna lista de pesquisadores
+	 * retorna lista de artigos
 	 */
-	public Collection<VeiculoComunicacao> getListaPesquisadores(){
-		return listaVeiculoComunicacao;
+	public Collection<ArtigoVeiculoComunicacao> getListaArtigos(){
+		return listaArtigos;
 	}
 	
 	/*
-	 * retorna VeiculoComunicacao por ID
+	 * retorna artigo por ID
 	 */
-	public VeiculoComunicacao getVeiculoComunicacaoById(String id){
-		for (VeiculoComunicacao veiculoComunicacao : listaVeiculoComunicacao) {
-			if(veiculoComunicacao.getIdVeiculo().contentEquals(id)){
-				return veiculoComunicacao;
+	public ArtigoVeiculoComunicacao getArtigoById(String id){
+		for (ArtigoVeiculoComunicacao artigo : listaArtigos) {
+			if(artigo.getIdArtigo().contentEquals(id)){
+				return artigo;
 			}
 		}
 		return null;
