@@ -31,7 +31,8 @@ public class Resultado {
 	
 	private void equacaoPopularidade(){
 		int numeroArtigosPublicados = artigo.getArtigosPesquisador("").size();
-		int posicao = artigo.ordemAutoriaPorPesquisador("", "");
+		int posicao = artigo.ordemAutoriaPorPesquisador("","");
+		
 		for (int i = 0; i < numeroArtigosPublicados; i++) {
 			
 		}
