@@ -59,10 +59,17 @@ public class ArtigoMainControle {
 	}
 	
 	/*
+	 * Retorna lista de artigos de determinado pesquisador
+	 */
+	public Collection<String> getArtigosPesquisador(String idPesquisador){
+		return artPesquisador.getListaArtigosByPesquisador(idPesquisador);
+	}
+	
+	/*
 	 * Retorna lista de autores do artigo
 	 */
 	public Collection<String> getAutoresArtigo(String idArtigo){
-		return artPesquisador.getListaIdPesquisadorAutor(idArtigo);
+		return artPesquisador.getListaPesquisadoresAutores(idArtigo);
 	}
 	
 	/*

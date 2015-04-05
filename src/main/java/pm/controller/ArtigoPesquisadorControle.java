@@ -49,6 +49,21 @@ public class ArtigoPesquisadorControle {
 		}
 	}
 	
+	
+	/*
+	 * retorna lista de artigos publicados por 
+	 * determinado pesquisador
+	 */
+	public Collection<String> getListaArtigosByPesquisador(String idPesquisador){
+		Collection<String> listaArtigosPorPesquisadores = new ArrayList<String>();
+		for (ArtigoPesquisador artigo : listaArtigos) {
+			if(artigo.getIdPesquisador().contentEquals(idPesquisador)){
+				listaArtigosPorPesquisadores.add(artigo.getIdArtigo());
+			}
+		}
+		return listaArtigosPorPesquisadores;
+	}
+	
 	/*
 	 * retorna lista de artigos
 	 */
@@ -56,7 +71,7 @@ public class ArtigoPesquisadorControle {
 		return listaArtigos;
 	}
 	
-	public Collection<String> getListaIdPesquisadorAutor(String idArtigo){
+	public Collection<String> getListaPesquisadoresAutores(String idArtigo){
 		Collection<String> listaPesquisadores = new ArrayList<String>();
 		for (ArtigoPesquisador artigo : listaArtigos) {
 			if(artigo.getIdArtigo().contentEquals(idArtigo)){
@@ -82,7 +97,7 @@ public class ArtigoPesquisadorControle {
 	/*
 	 * retorna artigoPesquisador por ID
 	 */
-	public ArtigoPesquisador getArtigoPesquisadorById(String id){
+	public ArtigoPesquisador getArtigorById(String id){
 		for (ArtigoPesquisador artigo : listaArtigos) {
 			if(artigo.getIdArtigo().contentEquals(id)){
 				return artigo;
