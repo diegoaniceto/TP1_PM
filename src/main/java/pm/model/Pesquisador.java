@@ -48,28 +48,28 @@ public class Pesquisador {
 	}
 
 
-	public String getHoras_ic() {
-		return horas_ic;
+	public Integer getHoras_ic() {
+		return Integer.parseInt(horas_ic);
 	}
 
 
-	public String getHoras_estagio_docencia() {
-		return horas_estagio_docencia;
+	public Integer getHoras_estagio_docencia() {
+		return Integer.parseInt(horas_estagio_docencia);
 	}
 
 
-	public String getNum_grad_orient() {
-		return num_grad_orient;
+	public Integer getNum_grad_orient() {
+		return Integer.parseInt(num_grad_orient);
 	}
 
 
-	public String getNum_M_orient() {
-		return num_M_orient;
+	public Integer getNum_M_orient() {
+		return Integer.parseInt(num_M_orient);
 	}
 
 
-	public String getNum_D_orient() {
-		return num_D_orient;
+	public Integer getNum_D_orient() {
+		return Integer.parseInt(num_D_orient);
 	}
     
 }

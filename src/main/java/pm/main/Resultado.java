@@ -64,6 +64,19 @@ public class Resultado {
 			popularidadePesquisador += numArtigosPublicados;
 			
 			//Falta implementar a parte das graduações
+			if(pesquisador.getTag_titulacao().equals("G")){
+				popularidadePesquisador += pesquisador.getHoras_ic() 
+						+ pesquisador.getHoras_estagio_docencia();
+			}else if(pesquisador.getTag_titulacao().equals("M")){
+				popularidadePesquisador += pesquisador.getHoras_ic() 
+						+ pesquisador.getHoras_estagio_docencia() + (10 * pesquisador.getNum_grad_orient());
+			}else if(pesquisador.getTag_titulacao().equals("D")){
+				popularidadePesquisador += pesquisador.getHoras_ic() 
+						+ pesquisador.getHoras_estagio_docencia() + (10 * pesquisador.getNum_grad_orient()
+						+(20 * pesquisador.getNum_M_orient()) + (30 * pesquisador.getNum_D_orient()));
+				//teste
+				System.out.println(popularidadePesquisador);
+			}
 		}
 	}
 
