@@ -1,8 +1,11 @@
 package pm.main;
 
+import java.util.Collection;
+
 import pm.controller.ArtigoMainControle;
 import pm.controller.PesquisadorControle;
 import pm.controller.VeiculoComunicacaoControle;
+import pm.model.Pesquisador;
 
 public class Resultado {
 	
@@ -29,17 +32,39 @@ public class Resultado {
 		this.arquivoEntradaArtigoVeiculoComunicacao = arquivoEntradaArtigoVeiculoComunicacao;
 	}
 	
-	private void equacaoPopularidade(){
-		int numeroArtigosPublicados = artigo.getArtigosPesquisador("").size();
-		int posicao = artigo.ordemAutoriaPorPesquisador("","");
-		
-		for (int i = 0; i < numeroArtigosPublicados; i++) {
-			
-		}
-	}
 	 
 	private void calculaPopularidadePesquisador(){
-		pesquisador.getListaPesquisadores();
+		//Para cada pesquisador
+		for (Pesquisador pesquisador : pesquisador.getListaPesquisadores()) {
+			
+			Collection<String> artigosPesquisador = artigo.
+					getArtigosPesquisador(pesquisador.getIdPesquisador());
+			
+			double popularidadePesquisador = 0;
+			
+			//Pega os artigos
+			for (String artigoId : artigosPesquisador) {
+				/*
+				 * Popularidade de artigos publicas
+				 * = 1/(posicao relativa pub artigo) + (numero de vezes que o
+				 * artigo foi citado)
+				 */
+				int posicao = artigo.ordemAutoriaPorPesquisador(
+						artigoId,pesquisador.getIdPesquisador());
+				int numVezesArtigoFoiCitado = artigo.getArtigosCitadores(artigoId).size();
+				
+				popularidadePesquisador += ((1/posicao) + numVezesArtigoFoiCitado);
+			}
+			/*
+			 * somado com a quantidade de artigos publicados
+			 */
+			int numArtigosPublicados = artigo.getArtigosPesquisador(
+					pesquisador.getIdPesquisador()).size();
+			
+			popularidadePesquisador += numArtigosPublicados;
+			
+			//Falta implementar a parte das graduações
+		}
 	}
 
 }
