@@ -51,19 +51,28 @@ public class Resultado {
 				 */
 				int posicao = artigo.ordemAutoriaPorPesquisador(
 						artigoId,pesquisador.getIdPesquisador());
-				int numVezesArtigoFoiCitado = artigo.getArtigosCitadores(artigoId).size();
+				int numVezesArtigoFoiCitado = 0;
 				
+				//verifica se artigo foi citado
+				if(!artigo.getArtigosCitadores(artigoId).isEmpty()){
+					numVezesArtigoFoiCitado = artigo.getArtigosCitadores(artigoId).size();
+				}
+	
 				popularidadePesquisador += ((1/posicao) + numVezesArtigoFoiCitado);
 			}
 			/*
 			 * somado com a quantidade de artigos publicados
 			 */
-			int numArtigosPublicados = artigo.getArtigosPesquisador(
-					pesquisador.getIdPesquisador()).size();
+			int numArtigosPublicados = 0;
+			
+			//Se ele tem artigos publicados
+			if(!artigo.getArtigosPesquisador(pesquisador.getIdPesquisador()).isEmpty()){
+				numArtigosPublicados = artigo.getArtigosPesquisador(
+						pesquisador.getIdPesquisador()).size();
+			}
 			
 			popularidadePesquisador += numArtigosPublicados;
 			
-			//Falta implementar a parte das graduações
 			if(pesquisador.getTag_titulacao().equals("G")){
 				popularidadePesquisador += pesquisador.getHoras_ic() 
 						+ pesquisador.getHoras_estagio_docencia();
@@ -78,6 +87,9 @@ public class Resultado {
 				System.out.println(popularidadePesquisador);
 			}
 		}
+	}
+	private void calculaFatorImpacto(){
+		
 	}
 
 }

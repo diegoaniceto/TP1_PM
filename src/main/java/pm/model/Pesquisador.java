@@ -5,10 +5,6 @@
  */
 package pm.model;
 
-/**
- *
- * @author dhca
- */
 public class Pesquisador {
    
     private String idPesquisador;
