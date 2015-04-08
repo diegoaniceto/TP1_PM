@@ -15,30 +15,26 @@ public class Resultado {
 	private String arquivoEntradaArtigoPesquisador="";
 	private String arquivoEntradaArtigoVeiculoComunicacao="";
 	
-		
+	private PesquisadorControle pesquisadores;
+	private VeiculoComunicacaoControle veiculo;
+	private ArtigoMainControle artigo;
+	
 	public Resultado(String arquivoEntradaPesquisador,
 			String arquivoEntradaVeiculoComunicacao,
 			String arquivoEntradaArtigoCitacoes,
 			String arquivoEntradaArtigoPesquisador,
 			String arquivoEntradaArtigoVeiculoComunicacao) {
-		this.arquivoEntradaPesquisador = arquivoEntradaPesquisador;
-		this.arquivoEntradaVeiculoComunicacao = arquivoEntradaVeiculoComunicacao;
-		this.arquivoEntradaArtigoCitacoes = arquivoEntradaArtigoCitacoes;
-		this.arquivoEntradaArtigoPesquisador = arquivoEntradaArtigoPesquisador;
-		this.arquivoEntradaArtigoVeiculoComunicacao = arquivoEntradaArtigoVeiculoComunicacao;
+		
+		pesquisadores = new PesquisadorControle(arquivoEntradaPesquisador);
+	    veiculo = new VeiculoComunicacaoControle(arquivoEntradaVeiculoComunicacao);
+		artigo = new ArtigoMainControle(arquivoEntradaArtigoCitacoes, 
+				arquivoEntradaArtigoPesquisador, arquivoEntradaArtigoVeiculoComunicacao);
 	}
 	
-	private PesquisadorControle pesquisador = new PesquisadorControle(arquivoEntradaPesquisador);
-	private VeiculoComunicacaoControle veiculo = new VeiculoComunicacaoControle(arquivoEntradaVeiculoComunicacao);
-	private ArtigoMainControle artigo = new ArtigoMainControle(arquivoEntradaArtigoCitacoes, 
-			arquivoEntradaArtigoPesquisador, arquivoEntradaArtigoVeiculoComunicacao);
 	
-	Collection<Pesquisador> listaPesquisadores =  pesquisador.getListaPesquisadores();
-
-	
-	private void calculaPopularidadePesquisador(){
+	public void calculaPopularidadePesquisador(){
 		//Para cada pesquisador
-		for (Pesquisador pesquisador : listaPesquisadores) {
+		for (Pesquisador pesquisador : pesquisadores.getListaPesquisadores()) {
 			
 			Collection<String> artigosPesquisador = artigo.
 					getArtigosPesquisador(pesquisador.getIdPesquisador());
@@ -86,9 +82,9 @@ public class Resultado {
 				popularidadePesquisador += pesquisador.getHoras_ic() 
 						+ pesquisador.getHoras_estagio_docencia() + (10 * pesquisador.getNum_grad_orient()
 						+(20 * pesquisador.getNum_M_orient()) + (30 * pesquisador.getNum_D_orient()));
-				//teste
-				System.out.println(popularidadePesquisador);
 			}
+			//teste
+			System.out.println(popularidadePesquisador);
 		}
 	}
 	private void calculaFatorImpacto(){

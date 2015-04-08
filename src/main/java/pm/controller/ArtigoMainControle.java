@@ -18,22 +18,19 @@ public class ArtigoMainControle {
 	private String arquivoEntradaArtigoPesquisador;
 	private String arquivoEntradaArtgioVeiculoComunicacao;
 	
-	private ArtigoCitacoesControle artCitacoes = 
-			new ArtigoCitacoesControle(arquivoEntradaArtigoCitacoes);
-	private ArtigoPesquisadorControle artPesquisador = 
-			new ArtigoPesquisadorControle(arquivoEntradaArtigoPesquisador);
-	private ArtigoVeiculoComunicacaoControle artVeiculoComunicacao = 
-			new ArtigoVeiculoComunicacaoControle(arquivoEntradaArtgioVeiculoComunicacao); 
+	private ArtigoCitacoesControle artCitacoes;
+	private ArtigoPesquisadorControle artPesquisador;
+	private ArtigoVeiculoComunicacaoControle artVeiculoComunicacao; 
 	/*
-	 * Construto da classe é necessario passar o caminho para os
-	 * três arquivos
+	 * Construto da classe ï¿½ necessario passar o caminho para os
+	 * trï¿½s arquivos
 	 */
 	public ArtigoMainControle(String arquivoEntradaArtigoCitacoes,
 			String arquivoEntradaArtigoPesquisador,
 			String arquivoEntradaArtgioVeiculoComunicacao) {
-		this.arquivoEntradaArtigoCitacoes = arquivoEntradaArtigoCitacoes;
-		this.arquivoEntradaArtigoPesquisador = arquivoEntradaArtigoPesquisador;
-		this.arquivoEntradaArtgioVeiculoComunicacao = arquivoEntradaArtgioVeiculoComunicacao;
+		artCitacoes = new ArtigoCitacoesControle(arquivoEntradaArtigoCitacoes);
+		artPesquisador = new ArtigoPesquisadorControle(arquivoEntradaArtigoPesquisador);
+		artVeiculoComunicacao = new ArtigoVeiculoComunicacaoControle(arquivoEntradaArtgioVeiculoComunicacao);
 	}
 	
 	/*

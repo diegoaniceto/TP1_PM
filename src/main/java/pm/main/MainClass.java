@@ -16,7 +16,7 @@ public class MainClass {
 				 arquivoEntradaArtigoPesquisador, arquivoEntradaArtigoVeiculoComunicacao
 				 );
 		 
-		 resultado.tatuDoOk();
+		 resultado.calculaPopularidadePesquisador();
 		 
     }
 }
