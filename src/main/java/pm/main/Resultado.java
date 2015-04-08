@@ -9,17 +9,13 @@ import pm.model.Pesquisador;
 
 public class Resultado {
 	
-	private String arquivoEntradaPesquisador;
-	private String arquivoEntradaVeiculoComunicacao;
-	private String arquivoEntradaArtigoCitacoes;
-	private String arquivoEntradaArtigoPesquisador;
-	private String arquivoEntradaArtigoVeiculoComunicacao;
+	private String arquivoEntradaPesquisador ="";
+	private String arquivoEntradaVeiculoComunicacao="";
+	private String arquivoEntradaArtigoCitacoes="";
+	private String arquivoEntradaArtigoPesquisador="";
+	private String arquivoEntradaArtigoVeiculoComunicacao="";
 	
-	private PesquisadorControle pesquisador = new PesquisadorControle(arquivoEntradaPesquisador);
-	private VeiculoComunicacaoControle veiculo = new VeiculoComunicacaoControle(arquivoEntradaVeiculoComunicacao);
-	private ArtigoMainControle artigo = new ArtigoMainControle(arquivoEntradaArtigoCitacoes, 
-			arquivoEntradaArtigoPesquisador, arquivoEntradaArtigoVeiculoComunicacao);
-	
+		
 	public Resultado(String arquivoEntradaPesquisador,
 			String arquivoEntradaVeiculoComunicacao,
 			String arquivoEntradaArtigoCitacoes,
@@ -32,10 +28,17 @@ public class Resultado {
 		this.arquivoEntradaArtigoVeiculoComunicacao = arquivoEntradaArtigoVeiculoComunicacao;
 	}
 	
-	 
+	private PesquisadorControle pesquisador = new PesquisadorControle(arquivoEntradaPesquisador);
+	private VeiculoComunicacaoControle veiculo = new VeiculoComunicacaoControle(arquivoEntradaVeiculoComunicacao);
+	private ArtigoMainControle artigo = new ArtigoMainControle(arquivoEntradaArtigoCitacoes, 
+			arquivoEntradaArtigoPesquisador, arquivoEntradaArtigoVeiculoComunicacao);
+	
+	Collection<Pesquisador> listaPesquisadores =  pesquisador.getListaPesquisadores();
+
+	
 	private void calculaPopularidadePesquisador(){
 		//Para cada pesquisador
-		for (Pesquisador pesquisador : pesquisador.getListaPesquisadores()) {
+		for (Pesquisador pesquisador : listaPesquisadores) {
 			
 			Collection<String> artigosPesquisador = artigo.
 					getArtigosPesquisador(pesquisador.getIdPesquisador());
@@ -91,5 +94,7 @@ public class Resultado {
 	private void calculaFatorImpacto(){
 		
 	}
-
+	public void tatuDoOk(){
+		System.out.println("Keep calm funcionou!!!!!!!!!!11!");
+	}
 }

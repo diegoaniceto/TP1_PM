@@ -9,12 +9,12 @@ import java.util.Collection;
 import pm.model.Pesquisador;
 
 public class PesquisadorControle {
-	private Collection<Pesquisador> listaPesquisadores;
+	private Collection<Pesquisador> listaPesquisadores = new ArrayList<Pesquisador>();
 	private String caminhoArquivoEntrada = "";
 	
 	/*
 	 * Construtor da classe recebe um caminho para arquivo
-	 * como parametro e é criada uma lista de pesquisadores
+	 * como parametro e eh criada uma lista de pesquisadores
 	 */
 	public PesquisadorControle(String caminhoArquivoEntrada){
 		this.caminhoArquivoEntrada = caminhoArquivoEntrada;

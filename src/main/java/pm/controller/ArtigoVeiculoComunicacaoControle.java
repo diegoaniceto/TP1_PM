@@ -9,12 +9,12 @@ import java.util.Collection;
 import pm.model.ArtigoVeiculoComunicacao;
 
 public class ArtigoVeiculoComunicacaoControle {
-	private Collection<ArtigoVeiculoComunicacao> listaArtigos;
+	private Collection<ArtigoVeiculoComunicacao> listaArtigos = new ArrayList<ArtigoVeiculoComunicacao>();
 	private String caminhoArquivoEntrada = "";
 	
 	/*
 	 * Construtor da classe recebe um caminho para arquivo
-	 * como parametro e é criada uma lista de artigos
+	 * como parametro e ï¿½ criada uma lista de artigos
 	 */
 	public ArtigoVeiculoComunicacaoControle(String caminhoArquivoEntrada){
 		//Passar o arquivo artigo_veiculos.txt
