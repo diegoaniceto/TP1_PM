@@ -94,8 +94,9 @@ public class Resultado {
 		}
 	}
 	public void calculaFatorImpacto(){
-		double fatorImpacto = 0;
+		
 		for (VeiculoComunicacao veiculoComunicacao : veiculo.getListaVeiculoComunicacao()) {
+			double fatorImpacto = 0;
 			
 			Collection<ArtigoVeiculoComunicacao> artigoVeiculo = artigo.getListaArtigoByIdVeiculo(
 					veiculoComunicacao.getIdVeiculo());
@@ -107,8 +108,7 @@ public class Resultado {
 						artigoVeiculoComunicacao.getIdArtigo()).size();
 			}
 			
-			double numArtigosPubVeiculo = artigo.getListaArtigoByIdVeiculo(
-					veiculoComunicacao.getIdVeiculo()).size(); 
+			double numArtigosPubVeiculo = artigoVeiculo.size(); 
 			
 			if(veiculoComunicacao.getTipoVeiculo().equals("C")){
 				fatorImpacto = (numVezesArtigoCitado/numArtigosPubVeiculo) + 1;
@@ -116,7 +116,9 @@ public class Resultado {
 				fatorImpacto = (numVezesArtigoCitado/numArtigosPubVeiculo) + 2;
 			}
 			BigDecimal fatorBigDecimal = new BigDecimal(fatorImpacto).setScale(4,RoundingMode.HALF_EVEN);
+			artigoVeiculo.clear();
 			System.out.println(veiculoComunicacao.getIdVeiculo()+","+fatorBigDecimal);
 		}
 	}
+
 }
