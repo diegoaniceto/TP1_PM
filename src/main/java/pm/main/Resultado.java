@@ -1,5 +1,8 @@
 package pm.main;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -13,12 +16,6 @@ import pm.model.Pesquisador;
 import pm.model.VeiculoComunicacao;
 
 public class Resultado {
-	
-	private String arquivoEntradaPesquisador ="";
-	private String arquivoEntradaVeiculoComunicacao="";
-	private String arquivoEntradaArtigoCitacoes="";
-	private String arquivoEntradaArtigoPesquisador="";
-	private String arquivoEntradaArtigoVeiculoComunicacao="";
 	
 	private PesquisadorControle pesquisadores;
 	private VeiculoComunicacaoControle veiculo;
@@ -37,8 +34,11 @@ public class Resultado {
 	}
 	
 	private Collection<String> listaPopularidadePesquisador = new ArrayList<String>();
+	private Collection<String> listaFatorImpactoBigDecimal = new ArrayList<String>();
+	private Collection<String> listaFatorImpacto = new ArrayList<String>();
+	private Collection<String> listaQualidadeArtigo = new ArrayList<String>();
 	
-	public void calculaPopularidadePesquisador(){
+	private void calculaPopularidadePesquisador(){
 		//Para cada pesquisador
 		for (Pesquisador pesquisador : pesquisadores.getListaPesquisadores()) {
 			
@@ -93,7 +93,8 @@ public class Resultado {
 			listaPopularidadePesquisador.add(pesquisador.getIdPesquisador()+","+ popuBigDecimal);
 		}
 	}
-	public void calculaFatorImpacto(){
+	
+	private void calculaFatorImpacto(){
 		
 		for (VeiculoComunicacao veiculoComunicacao : veiculo.getListaVeiculoComunicacao()) {
 			double fatorImpacto = 0;
@@ -116,9 +117,86 @@ public class Resultado {
 				fatorImpacto = (numVezesArtigoCitado/numArtigosPubVeiculo) + 2;
 			}
 			BigDecimal fatorBigDecimal = new BigDecimal(fatorImpacto).setScale(4,RoundingMode.HALF_EVEN);
+			//aux para calculo de qualidade artigo
+			listaFatorImpacto.add(veiculoComunicacao.getIdVeiculo()+","+fatorImpacto);
+			//arredonda o valor para saida no txt
+			listaFatorImpactoBigDecimal.add(veiculoComunicacao.getIdVeiculo()+","+fatorBigDecimal);
 			artigoVeiculo.clear();
-			System.out.println(veiculoComunicacao.getIdVeiculo()+","+fatorBigDecimal);
 		}
 	}
-
+	
+	
+	private void calculaQualidadeArtigo(){
+		
+		if(listaFatorImpacto.size() < 1){
+			calculaFatorImpacto();
+		}
+		
+		for (ArtigoVeiculoComunicacao art : artigo.getListaArtigos()) {
+			double fatorImpacto = 0;
+			double qualidadeArtigo = 0;
+			VeiculoComunicacao veiculoComunicacaoArt = veiculo.
+					getVeiculoComunicacaoById(art.getVeiculoComunicacaoId());
+			
+			double numVezesArtigoCitado = 0; 
+			
+			numVezesArtigoCitado += artigo.getArtigosCitadores(
+					art.getIdArtigo()).size();
+			
+			for(String fator : listaFatorImpacto){
+				String[] tk = fator.split(",");
+				if(tk[0].equals(veiculoComunicacaoArt.getIdVeiculo())){
+					fatorImpacto = Double.parseDouble(tk[1]);
+				}
+			}
+			qualidadeArtigo = fatorImpacto * numVezesArtigoCitado;
+			BigDecimal qualidadeBigDecimal = new BigDecimal(qualidadeArtigo).setScale(4,RoundingMode.HALF_EVEN);
+			listaQualidadeArtigo.add(art.getIdArtigo()+","+qualidadeBigDecimal);
+		}
+			
+	}
+	
+	public void geraSaidaPopularidadePesquisador() throws IOException{
+		
+		if(listaPopularidadePesquisador.size() < 1){
+			calculaPopularidadePesquisador();
+		}
+		
+		FileWriter arq = new FileWriter("popularidade_pesquisador.txt");
+		PrintWriter gravarArq = new PrintWriter(arq);
+		for (String linha : listaPopularidadePesquisador){
+			gravarArq.printf(linha+'\n');
+		}
+		arq.close();
+		
+		System.out.println("Arquivo popularidade_pesquisador.txt gerado com sucesso");
+		
+	}
+	
+	public void geraSaidaFatorImpacto() throws IOException{
+		
+		if(listaFatorImpactoBigDecimal.size() < 1){
+			calculaFatorImpacto();
+		}
+		FileWriter arq = new FileWriter("fatorImpacto_veiculo.txt");
+		PrintWriter gravarArq = new PrintWriter(arq);
+		for (String linha : listaFatorImpactoBigDecimal){
+			gravarArq.printf(linha+'\n');
+		}
+		arq.close();
+		System.out.println("Arquivo fatorImpacto_veiculo.txt gerado com sucesso");
+	}
+	
+	public void geraSaidaQualidadeArtigo() throws IOException{
+		if(listaQualidadeArtigo.size() < 1){
+			calculaQualidadeArtigo();
+		}
+		FileWriter arq = new FileWriter("pontuacao_artigo.txt");
+		PrintWriter gravarArq = new PrintWriter(arq);
+		for (String linha : listaQualidadeArtigo){
+			gravarArq.printf(linha+'\n');
+		}
+		arq.close();
+		System.out.println("Arquivo pontuacao_artigo.txt gerado com sucesso");
+	}
 }
