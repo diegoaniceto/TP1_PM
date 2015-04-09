@@ -32,7 +32,12 @@ public class ArtigoMainControle {
 		artPesquisador = new ArtigoPesquisadorControle(arquivoEntradaArtigoPesquisador);
 		artVeiculoComunicacao = new ArtigoVeiculoComunicacaoControle(arquivoEntradaArtgioVeiculoComunicacao);
 	}
-	
+	/*
+	 * Retorna lista de artigos por veiculo 
+	 */
+	public Collection<ArtigoVeiculoComunicacao> getListaArtigoByIdVeiculo(String id){
+		return artVeiculoComunicacao.getListaArtigoByIdVeiculo(id);
+	}
 	/*
 	 * Retorna lista de artigos e veiculos de comunicacao
 	 */

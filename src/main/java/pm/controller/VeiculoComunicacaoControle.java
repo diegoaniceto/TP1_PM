@@ -51,7 +51,7 @@ public class VeiculoComunicacaoControle {
 	/*
 	 * retorna lista de pesquisadores
 	 */
-	public Collection<VeiculoComunicacao> getListaPesquisadores(){
+	public Collection<VeiculoComunicacao> getListaVeiculoComunicacao(){
 		return listaVeiculoComunicacao;
 	}
 	

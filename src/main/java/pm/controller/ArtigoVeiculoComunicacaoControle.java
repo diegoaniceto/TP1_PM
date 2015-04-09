@@ -10,6 +10,7 @@ import pm.model.ArtigoVeiculoComunicacao;
 
 public class ArtigoVeiculoComunicacaoControle {
 	private Collection<ArtigoVeiculoComunicacao> listaArtigos = new ArrayList<ArtigoVeiculoComunicacao>();
+	private Collection<ArtigoVeiculoComunicacao> listaArtigosPorVeiculo = new ArrayList<ArtigoVeiculoComunicacao>();
 	private String caminhoArquivoEntrada = "";
 	
 	/*
@@ -56,6 +57,17 @@ public class ArtigoVeiculoComunicacaoControle {
 		return listaArtigos;
 	}
 	
+	/*
+	 * Retorna lista de artigos por veiculo 
+	 */
+	public Collection<ArtigoVeiculoComunicacao> getListaArtigoByIdVeiculo(String id){
+		for (ArtigoVeiculoComunicacao artigo : listaArtigos) {
+			if(artigo.getVeiculoComunicacaoId().contentEquals(id)){
+				 listaArtigosPorVeiculo.add(artigo);
+			}
+		}
+		return listaArtigosPorVeiculo;
+	}
 	/*
 	 * retorna artigo por ID
 	 */

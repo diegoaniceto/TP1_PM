@@ -1,11 +1,16 @@
 package pm.main;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import pm.controller.ArtigoMainControle;
 import pm.controller.PesquisadorControle;
 import pm.controller.VeiculoComunicacaoControle;
+import pm.model.ArtigoVeiculoComunicacao;
 import pm.model.Pesquisador;
+import pm.model.VeiculoComunicacao;
 
 public class Resultado {
 	
@@ -31,6 +36,7 @@ public class Resultado {
 				arquivoEntradaArtigoPesquisador, arquivoEntradaArtigoVeiculoComunicacao);
 	}
 	
+	private Collection<String> listaPopularidadePesquisador = new ArrayList<String>();
 	
 	public void calculaPopularidadePesquisador(){
 		//Para cada pesquisador
@@ -48,7 +54,7 @@ public class Resultado {
 				 * = 1/(posicao relativa pub artigo) + (numero de vezes que o
 				 * artigo foi citado)
 				 */
-				int posicao = artigo.ordemAutoriaPorPesquisador(
+				double posicao = artigo.ordemAutoriaPorPesquisador(
 						artigoId,pesquisador.getIdPesquisador());
 				int numVezesArtigoFoiCitado = 0;
 				
@@ -83,14 +89,34 @@ public class Resultado {
 						+ pesquisador.getHoras_estagio_docencia() + (10 * pesquisador.getNum_grad_orient()
 						+(20 * pesquisador.getNum_M_orient()) + (30 * pesquisador.getNum_D_orient()));
 			}
-			//teste
-			System.out.println(popularidadePesquisador);
+			BigDecimal popuBigDecimal = new BigDecimal(popularidadePesquisador).setScale(4,RoundingMode.HALF_EVEN);
+			listaPopularidadePesquisador.add(pesquisador.getIdPesquisador()+","+ popuBigDecimal);
 		}
 	}
-	private void calculaFatorImpacto(){
-		
-	}
-	public void tatuDoOk(){
-		System.out.println("Keep calm funcionou!!!!!!!!!!11!");
+	public void calculaFatorImpacto(){
+		double fatorImpacto = 0;
+		for (VeiculoComunicacao veiculoComunicacao : veiculo.getListaVeiculoComunicacao()) {
+			
+			Collection<ArtigoVeiculoComunicacao> artigoVeiculo = artigo.getListaArtigoByIdVeiculo(
+					veiculoComunicacao.getIdVeiculo());
+			
+			double numVezesArtigoCitado = 0; 
+			
+			for (ArtigoVeiculoComunicacao artigoVeiculoComunicacao : artigoVeiculo) {
+				numVezesArtigoCitado += artigo.getArtigosCitadores(
+						artigoVeiculoComunicacao.getIdArtigo()).size();
+			}
+			
+			double numArtigosPubVeiculo = artigo.getListaArtigoByIdVeiculo(
+					veiculoComunicacao.getIdVeiculo()).size(); 
+			
+			if(veiculoComunicacao.getTipoVeiculo().equals("C")){
+				fatorImpacto = (numVezesArtigoCitado/numArtigosPubVeiculo) + 1;
+			}else if(veiculoComunicacao.getTipoVeiculo().equals("R")){
+				fatorImpacto = (numVezesArtigoCitado/numArtigosPubVeiculo) + 2;
+			}
+			BigDecimal fatorBigDecimal = new BigDecimal(fatorImpacto).setScale(4,RoundingMode.HALF_EVEN);
+			System.out.println(veiculoComunicacao.getIdVeiculo()+","+fatorBigDecimal);
+		}
 	}
 }
