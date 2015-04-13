@@ -1,0 +1,283 @@
+%Documentação do Trabalho Prático 0 de AEDSIII
+%Édipo Fernandes Vieira de Oliveira - 2011054324
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel} %idioma
+\usepackage{ae} %caracteres especiais
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{enumerate}
+\usepackage[tmargin=2cm, bmargin=2cm, lmargin=2cm, rmargin=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage[lined,algonl,ruled]{algorithm2e} %Para acrescentar algorithm
+\begin{document}
+ 
+ %capa
+ 
+ \title{Trabalho Prático 0: \\ Quadtree \\}
+ \author{Édipo Fernandes Vieira de Oliveira - 2011054324\\Departamento de Ciência da Computação -- Universidade Federal de Minas Gerais\\
+ \\\textit edipofvo@dcc.ufmg.br}
+  \maketitle
+ 
+ %\newpage
+ %sumario
+  %use o section
+
+  \textbf{\textit \\Resumo: } 
+  \textit{\\Esse relatório descreve a implementação de uma heurística para fazer o mapeamento de pontos em um espaço
+  bidimensional utilizando uma estrutura de dados conhecida como Quadtree, e também retornar todos os pontos abrangidos 
+  por um retângulo dado pelos pontos x1,y1;x2,y2.  
+  \\O trabalho cumpriu seus objetivos em exercitar primitivas básicas da Linguagem C (estruturas de dados, modularização,
+  alocação dinâmica de memória e a compilação do código através do Makefile), e também apresentar os padrões de documentação
+  avaliados pela disciplina.
+  }
+\section*{1. Introdução}
+  Neste trabalho, nós descrevemos, implementamos, e analisamos uma solução para o problema em que se consiste em implementar
+  a estrutura de dados de uma \textit{Quadtree} para o mapeamento dos pontos lidos através do arquivo de entrada, os pontos são 
+  subdivididos em quadrantes dentro da estrutura implementada. A pesquisa dos pontos contidos pelo retângulo é feita através de
+  um vetor onde os pontos são são armazenados, e ordenados por um algoritmo específico.\\\\
+  Foi implementada uma heurística que busca fazer esta tarefa de forma eficaz e eficiente conseguindo-se bons resultado. 
+  O trabalho cumpriu seus objetivos exercitar primitivas básicas da Linguagem C e iniciar a 
+  discussão sobre problemas complexos e suas soluções.\\\\
+  O restante deste relatório esta organizado da seguinte forma:
+\begin{itemize}
+  \item A seção 2 discute detalhes de implementação. 
+  \item A seção 3 traz a análise de complexidade das principais funções além da análise sobre o 
+  ponto de vista do gasto de memória.
+  \item A seção 4 a análise experimental e os demais testes realizados durante o desenvolvimento
+  do programa.
+  \item A seção 5 apresenta uma breve conclusão sobre o trabalho. 
+  \item E por fim a seção 6 traz as referências bibliográficas.
+\end{itemize}
+
+\section*{2. Implementação}
+  O termo \textit{Quadtree} é utilizado para descrever uma classe
+  de estruturas hierarquicas cuja propriedade em comum é o princípio da decomposição recursiva do espaço. As Quadtrees são usadas para 
+  representar pontos, regiões, curvas, superfícies e volumes. A decomposição pode ser feita em partes iguais em cada nível (decomposição regular),
+  ou pode depender dos dados de entrada. A resolução da decomposição, ou seja, o número de vezes que o processo de decomposição é aplicado, pode 
+  ser fixado com antecedência, ou pode depender das propriedades dos dados de entrada. 
+  \footnote[1]{http://www.lcad.icmc.usp.br/\~~nonato/ED/Quadtree/quadtree.html}\\
+  A estrutura da \textit{Quadtree} é baseada na implementação da estrutura de uma árvore binária, a grande diferença é o 
+  número de ponteiros para os filhos, a árvore binária possui dois ponteiros apenas, já a \textit{Quadtree} possui ponteiros para 
+  quatro filhos distintos.\\
+  Neste trabalho foram implementadas duas novas bibliotecas, \textit{tp0.h}, com as estruturas e as funções necessárias para inicialização 
+  do programa principal, e funções para manipulação de arquivos, \textit{quadtree.h}, que contém as funções utilizadas pelo Tipo 
+  Abstrato de Dados(TAD) Quadtree, além do programa principal \textit{main.c} onde são feitas as chamadas das funções para 
+  leitura do arquivo e escrita nas estruturas.\\\\
+  Detalharemos agora cada um dessas bibliotecas e estruturas, vamos começar explicando sobre a estrutura da Quadtree:
+\subsection*{2.1 Quadtree} 
+\subsubsection*{2.1.1 Estruturas de dados}
+
+\begin{algorithm}[h!] 
+    double x\;
+    double y\;
+  \caption{coordenada}
+\end{algorithm}
+
+ \qquad Estrutura que representa um ponto, ou uma \textit{coordenada} em si.
+  Contém dois valores de ponto flutuante \textit{x} e \textit{y} que quando ligados formam um ponto. 
+ 
+ \begin{algorithm}[h!] 
+    No *filhos[4]\;
+    coordenada *A\;
+    coordenada *B\;
+    coordenada *C\;
+    coordenada *D\;
+    int numPontosA\;
+    int numPontosB\;
+    int numPontosC\;
+    int numPontosD\;
+    int xmin\;
+    int ymin\;
+    int xmax\;
+    int ymax\;
+  \caption{No}
+\end{algorithm}
+
+ \qquad O \textit{No} que contém ponteiros de coordenadas que possuem memória alocada dinamicamente para eles
+  que formam os quatro quadrantes de  da Quadtree, além disso possui quatro ponteiros para os filhos, para assim formar
+  a estrutura de árvore e por ultimo quatro valores inteiros que representam simultaneamente x e y minímos e máximos que são
+  os limites de cada quadrante.\\\\
+  
+\subsubsection*{2.1.2 Funções}
+\begin{itemize}
+  \item inicializa: Inicia um \textit{no} vazio.
+  \item insere: Verifica se a árvore está vazia, caso sim, uma nova posição de memória de tamanho \textit{no} é dinamicamente 
+   alocada,uma função auxiliar é chamada para determinar em qual quadrante o ponto devera ser inserido,além da inserção do ponto
+   os quatro novos ponteiros são direcionados para \textit{NULL}. Caso o \textit{no} não esteja vazio uma verificação é feita para
+   saber se o quadrante a qual o ponto pertece ainda há espaço livre para inserção de novos pontos, se não houver espaço, a função é chamada 
+   recursivamente e inseridos os pontos antigos e o ponto novo para um novo quadrante válido. 
+  \item achaQuadrante: Função que recebe uma \textit{coordenada x,y} e retorna o número do quadrante a qual esse ponto pertence.
+  \item contaFolhas: Função que conta o número de folhas(representam o número de quadrantes da árvore) e retorna um inteiro com esse valor .
+  \item compara: Função auxiliar para a ordenação dos resultados obtidos na busca dos pontos que estão contidos pelos limites do retângulo.
+  \item pesquisa: Função que retorna um vetor ordenado com todos os pontos contidos pelos limites do retângulo.
+ \end{itemize}
+ 
+\subsection*{2.2 TP0} 
+
+  \textit{tp0.h} é responsável pela coleta de todos os dados que são utilizados por \textit{quadtree.h}, e também responsável
+  por receber todos os dados gerados por \textit{quadtree.h}.
+ 
+\subsubsection*{2.2.2 Funções}
+ \begin{itemize}
+  \item abreArquivoEntrada: Direciona um ponteiro para a leitura de um arquivo.
+  \item abreArquivoSaida: Direciona um ponteiro para a escrita de um arquivo.
+  \item leNumInstancias: Lê do arquivo o primeiro valor que é um inteiro que representa o número de instâncias que o programa irá ter.
+  \item leArquivo: Le dados do arquivo de entrada, e retorna um vetor com todas as coordenadas a serem inseridas na Quadtree
+  \item rodaPrograma: Função principal que passa todos os dados lidos da entrada para a estrutura Quadtree, e também responsável por gerar
+    o arquivo de saída.
+ \end{itemize}
+
+ \subsection*{2.3 Main}
+ Main é o programa principal,recebe o nome dos arquivos de entrada e saída onde são feitas as chamadas as funções de manipulação de arquivo, 
+ e a principal função \textit{rodaPrograma}.
+%\begin{figure}[!htb]
+ % \centering
+  %\includegraphics[scale=0.4]{vetorLista}
+  %\caption{TAD vetor de listas}
+%\label{Rotulo}
+%\end{figure}
+  
+\section*{3. Análise de Complexidade}
+\subsection*{3.1 Quadtree}
+Análise de complexidade das funções do programa.
+%\subsection*{3.1 Processamento}
+\begin{itemize}
+  \item inicializa: Faz o mesmo procedimento independe de n, logo O(1).
+  \item insere: O custo médio para inserir ou buscar um ponto é proporcinal a O(log4 N) onde N é o número de pontos. 
+  No pior caso a complexidade será consideravelmente maior, pois dependerá da forma da árvore.
+  O tempo médio necessário para constriur uma Quadtree a partir de pontos aleatórios é proporcional a (Nlog4N).
+  Nestes casos estamos supondo que não há nenhum critério de balanceamento da árvore. Além disso dentro da Quadtree a chamada de outra
+  função auxiliar a \textit{achaQuadrante} que é uma função sem laços internos onde apenas são feitas comparações logo o custo é O(1).
+  Totalizando \textit{0(Nlog4N)} +  \textit{O(1)}.
+  \item achaQuadrante: Faz o mesmo procedimento independe de n, logo O(1).
+  \item contaFolhas: Função nlog(n).
+  \item compara: Faz o mesmo procedimento independe de n, logo O(1).
+  \item pesquisa: Faz uma busca sequencial em um vetor de tamanho N e insere em um novo vetor e ordena o mesmo, ou seja, O(n). A ordenação é feita com um 
+  algoritmo similiar ao \textit{quicksort}, é uma função da biblioteca \textit{stdlib.h} chamada \textit{qsort} essa função possui custo de tempo
+  O(n lg2 n) no melhor caso e caso médio e O(n2) no pior caso, já a complexidade por espaço é O(lg2 n) para todos os casos. Logo a complexidade total
+  da função é \textit{O(n)}.
+\end{itemize}
+\subsection*{3.2 TP0}
+\begin{itemize}
+  \item abreArquivoEntrada: Faz o mesmo procedimento independe de n, logo O(1).
+  \item abreArquivoSaida: Faz o mesmo procedimento independe de n, logo O(1).
+  \item leNumInstancias: Faz o mesmo procedimento independe de n, logo O(1).
+  \item leArquivo: Possui um loop interno onde são feita \textit{n} iterações, onde \textit{n} é a quantidade pontos a serem lidos do arquivo 
+    de entrada. Logo a função é \textit{O(n)}.
+  \item rodaPrograma: Possui dentro dela diversas chamadas de funções:
+  \subitem leArquivo - \textit{O(n)}.
+  \subitem Loop onde são feitas n iterações, onde n é o número de instâncias que o programa deve term, logo - \textit{O(n)}.
+  \subitem insere - \textit{0(Nlog4N)}.
+  \subitem contaFolhas - \textit{nlogn}.
+  \subitem Loop onde são feitas n iterações, onde n é o número de pesquisas a serem feitas no vetor de pontos logo - \textit{O(n)}.
+  \subitem pesquisa - \textit{O(n)}.
+  \\\\Sobressaindo assim \textit{O(n)} como complexidade final da função.
+ \end{itemize}
+ 
+ \subsection*{3.3 Main}
+ \begin{itemize}
+  \item Main: Possui dentro dela diversas chamadas de funções:
+  \subitem abreArquivoEntrada -\textit{O(1)}.
+  \subitem abreArquivoSaida -\textit{O(1)}.
+  \subitem leNumInstancia -\textit{O(1)}.
+  \subitem rodaPrograma -\textit{O(n)}.
+  \\\\Sobressaindo assim \textit{O(n)} como complexidade final da função.
+ \end{itemize}
+\section*{4. Análise Experimental}
+\subsection*{4.1 Ambiente utilizado (Hardware e Software)}
+\begin{itemize}
+ \item Processador: Pentium Dual Core; 
+ \item Memória: 2GB;
+ \item Sistema Operacional: Ubuntu 12.04 LTS
+ \item Compilador: GCC 4.6.3
+\end{itemize}
+\subsection*{4.2 Compilação}
+O programa deve ser compilado através de um compilador GCC através de um makefile ou do seguinte comando:\\\\
+\textit{gcc main.c tp0.c quadtree.c -o tp0}
+\subsection*{4.3 Execução}
+A execução do programa tem como parâmetros:
+\begin{itemize}
+ \item Um arquivo de entrada;
+ \item Um arquivo de saída;
+\end{itemize}
+O comando da execução do programa é da forma:\\\\
+\textit{./tp0 input.txt output.txt}\\
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[scale=0.4]{1}
+  \caption{1}
+\label{Rotulo}
+\end{figure}
+  
+  Vários testes foram realizados com o programa de forma a verificar o seu funcionamento.
+  foram realizados testes que levaram em consideração os gastos de processamento(tempo de execução), 
+  testes de funcionalidades também foram feitos
+  para diferentes entradas.\\
+  Na tabela e gráficos(figura 1: 1) abaixo estão alguns exemplos de tempo de execução vs entradas com pontos repetidos, pode ser perceber
+  que há uma variancia muito grande no tempo de execução do algoritmo devido ao fato dos pontos sempre ficarem no mesmo quadrante.
+  A próxima tabela e gráfico(figura 2: 2) mostra a diferença no tempo de execução para diversas pesquisas do limete retângulo no vetor de pontos 
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[scale=0.4]{2}
+  \caption{2}
+\label{Rotulo}
+\end{figure}
+  
+\begin{table}[ht!]
+\centering
+\begin{footnotesize}
+\begin{tabular}{|c|c|}
+\hline
+  \textbf{Quantidade de Pontos}	 &\textbf{Tempo} \\ \hline
+  8					& 0m0.829s	\\ \hline
+  16					& 0m1.468s	\\ \hline
+  32					& 0m0.152s	\\ \hline
+  56					& 0m11.487s	\\ \hline
+  64					& 0m11.570s	\\ \hline
+\end{tabular}
+\end{footnotesize}
+\end{table}
+ 
+ 
+ \begin{table}[ht!]
+\centering
+\begin{footnotesize}
+\begin{tabular}{|c|c|}
+\hline
+  \textbf{Quantidade de Pesquisas de pontos do retângulo}	 &\textbf{Tempo} \\ \hline
+  8					& 0m0.829s	\\ \hline
+  16					& 0m2.540s	\\ \hline
+  32					& 0m0.151s	\\ \hline
+  56					& 0m0.254s	\\ \hline
+  64					& 0m0.201s	\\ \hline
+\end{tabular}
+\end{footnotesize}
+\end{table}
+ 
+ Algumas entradas podem variar o tempo de execução do programa por exemplo nos dois casos testados entradas pequenas tiveram tempo de execução
+ maiores que algumas entradas de tamanho o dobro maior.
+
+\section*{5. Conclusão}
+Analisando a heurística proposta percebemos que ela atinge plenamente seus objetivos ela
+consegue ler texto grandes e processa-los em um tempo de execução satisfatório. A implementação do trabalho transcorreu
+sem maiores problemas e os resultados ficaram dentro do esperado. Foi muito agradável
+de implementar, notavelmente enriquecedor atingindo plenamente seus objetivos( exercitar primitivas 
+básicas da Linguagem C e iniciar a discussão sobre problemas complexos e
+suas soluções), além de apresentar ao desenvolvedor deste trabalho um software extremamente útil e poderoso
+o valgrind, que foi muito útil para poder encontrar trechos do código onde estava havendo falhas de segmentação
+e vazamento de memória.
+
+
+\section*{6. Referências bibliográficas}
+\begin{itemize}
+\item Ziviani, N. (2007). Projeto de Algoritmos com implementações em Pascal e
+C. Pioneira Thomson Learning.
+ \item Schildt, H.(1996). C completo e total 3ª ed. makron books. 
+ \item Cormem, T.(2002 ). Algoritmos: Teoria e Prática. Campus. 
+ \item http://www.lcad.icmc.usp.br/\~~nonato/ED/Quadtree/quadtree.html (acessado dia 01/04/2013)
+ \item http://pt.wikibooks.org/wiki/Programar\_em\_C/Árvores\_binárias(acessado dia 01/04/2013)
+ \item http://en.wikipedia.org/wiki/Quadtree(acessado dia 01/04/2013)
+ \item http://www.chartle.net/(acessado dia 01/04/2013)
+\end{itemize} 
+\end{document}
