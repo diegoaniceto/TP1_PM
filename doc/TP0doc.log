@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/Arch Linux) (preloaded format=pdflatex 2015.4.13)  14 APR 2015 11:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/Arch Linux) (preloaded format=pdflatex 2015.4.13)  14 APR 2015 12:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -600,7 +600,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 60--63
 
  []
 
-[2 <./Artigo.png>] [3] (./TP0doc.aux) ) 
+[2 <./Artigo.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 69--85
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--85
+
+ []
+
+[3] (./TP0doc.aux) ) 
 Here is how much of TeX's memory you used:
  4814 strings out of 493109
  60371 string characters out of 6140856
@@ -609,12 +619,12 @@ Here is how much of TeX's memory you used:
  30033 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,6n,24p,463b,230s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr
-/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on TP0doc.pdf (3 pages, 82894 bytes).
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx1
+2.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/sha
+re/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmti12.pfb>
+Output written on TP0doc.pdf (3 pages, 84102 bytes).
 PDF statistics:
  37 PDF objects out of 1000 (max. 8388607)
  24 compressed objects within 1 object stream
