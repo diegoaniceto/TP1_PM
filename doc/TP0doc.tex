@@ -48,17 +48,17 @@
     \caption{Estrutura de Dependência de Artigo}
    \label{Rotulo}
   \end{figure}
-  Como pode ser visto no diagrama acima, a classe \textbf{ArtigoMainControler.java} faz o encapsulamento das demais classes, fornecendo o conjunto de todas as operações necessárias envolvendo um Artigo, não sendo necessario assim nenhuma altaração nas classes bases.\\\\
+  Como pode ser visto no diagrama acima, a classe \textbf{ArtigoMainControle.java} faz o encapsulamento das demais classes, fornecendo o conjunto de todas as operações necessárias envolvendo um Artigo, não sendo necessario assim nenhuma altaração nas classes bases.\\\\
   A modularização das entidades Pesquisador e Veiculo de Comunicação foram feitas de forma similar a classe Artigo, porém de forma mais simples pois essas classes não tem dependências de demais classes, o que facilita o reuso e a manutenção destas.
 
   \subsection*{2.2. Conceitos OO}
     Para a modularização e o encapsulamento das classes fossem possíveis, foi necessária a implementação dos conceitos de \textit{Orientação a Objeto}.\\\\
-    O conceito utilizado para realizar o relacionamento entre as classes foi o de \textbf{Composição} onde temos uma classe que funciona como o \textit{todo} e classes que funcionam como uma parte deste todo, por exemplo, a classe \textbf{PesquisadorControler} (responsável pela implementação dos metódos referentes a entidade Pesquisador) é o todo e a classe \textbf{Pesquisador} é parte da classe \textbf{PesquisadorControler}.
+    O conceito utilizado para realizar o relacionamento entre as classes foi o de \textbf{Composição} onde temos uma classe que funciona como o \textit{todo} e classes que funcionam como uma parte deste todo, por exemplo, a classe \textbf{PesquisadorControle} (responsável pela implementação dos metódos referentes a entidade Pesquisador) é o todo e a classe \textbf{Pesquisador} é parte da classe \textbf{PesquisadorControle}.
     Foi utilizado também o conceito de Objeto, que foi utilizado para que o acesso as classes dependentes fosse possível.
 
   \subsection*{2.3. Calculos e Execução}
     O principal objetivo do trabalho era fornecer uma lista com a popularidade de cada pesquisador, o fator de impacto de cada veiculo de comunicação e a pontuação de cada artigo. Para resolver esses problemas, foi criada uma classe especifica que processa todos esses dados e gera os dados solicitados.\\\\
-    Esta classe é composta por objetos de todas as classes \textbf{Controler} que fornecem as operações de suas respectivas entidades, tornando possível o processamento dos dados e o fornecimento das respostas.\\\\
+    Esta classe é composta por objetos de todas as classes \textbf{Controle} que fornecem as operações de suas respectivas entidades, tornando possível o processamento dos dados e o fornecimento das respostas.\\\\
     Para que a solução fosse executada, foi desenvolvida uma classe principal, \textbf{MainClass}, que contem um construtor e um objeto da classe \textbf{Resultado} que realiza os cálculos necessários pra solucionar o problema proposto.
 
 
