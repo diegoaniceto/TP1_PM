@@ -27,7 +27,7 @@
 \section*{1. Introdução}
 
   Este trabalho tem como objetivo, introduzir os principais conceitos da Programação Orientada ao Objeto e modularização de código. Para que estes fossem exercitados foi proposto a solução de um problemas de manipulação e armazenamento de dados referentes a uma rede social de pesquisadores onde eles podem se relacionar através de artigos publicados, podem publicar seus artigos desenvidos, entre outras coisas \\\\
-  A modelagem do problema gira em torno de três entidades principais, que são os Pesquisadores, os Veiculos de Comunicação e os Artigos, e a partir delas e dos arquivos de entradas disponibilizados, e a partir disso realizar os calculos solictidos pela especificação do trabalho, que são: o calculo de popularidade de cada Pesquisador, o fator de impacto de cada Veiculo de Comunicação, e a pontuação de cada Artigo.\\\\
+  A modelagem do problema gira em torno de três entidades principais, que são os Pesquisadores, os Veiculos de Comunicação e os Artigos, e a partir delas e dos arquivos de entradas disponibilizados, e a partir disso realizar os calculos solictidos pela especificação do trabalho, que são: o calculo de popularidade de cada Pesquisador, o fator de impacto de cada Veiculo de Comunicação, e a pontuação de cada Artigo.
 
   \begin{itemize}
   \item A seção 2 discute detalhes de implementação.
@@ -38,6 +38,16 @@
 
 %% Implementação %%
 \section*{2. Implementação}
+  Como dito na secção anterior, a implementação da solução gira em torno das entidades Pesquisador, Veiculos de Cominicação e Artigo, estas foram mapeadas através da implementação de classes Java, onde seus atributos e metódos identificam-nas. Porém, apenas elas não são o suficiente para a resolução do problema, outras classes dependentes delas são necessarias para que a solução obtivesse êxito. \\\\
+  Das classes-entidades citadas acima, uma merece atenção especial, a entidade Artigo, pois ela se relaciona diretamente com as classes \textit{Veiculos de Cominicação} e \textit{Pesquisador}, além disso é preciso identificar as citações feitas nos artigos em questão. Afim de modularizar o código e facilitar seu entendimento as classes fora estruturadas da seguinte forma:
+
+  \begin{figure}[!htb]
+   \centering
+    \includegraphics[scale=0.5]{Artigo}
+    \caption{Estrutura de Dependência de Artigo}
+   \label{Rotulo}
+  \end{figure}
+
 
 %% Testes %%
 \section*{3. Testes}
