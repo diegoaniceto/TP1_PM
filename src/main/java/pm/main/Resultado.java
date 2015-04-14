@@ -90,7 +90,7 @@ public class Resultado {
 						+(20 * pesquisador.getNum_M_orient()) + (30 * pesquisador.getNum_D_orient()));
 			}
 			BigDecimal popuBigDecimal = new BigDecimal(popularidadePesquisador).setScale(4,RoundingMode.HALF_EVEN);
-			listaPopularidadePesquisador.add(pesquisador.getIdPesquisador()+","+ popuBigDecimal);
+			listaPopularidadePesquisador.add(pesquisador.getIdPesquisador()+";"+ popuBigDecimal);
 		}
 	}
 	
@@ -118,9 +118,9 @@ public class Resultado {
 			}
 			BigDecimal fatorBigDecimal = new BigDecimal(fatorImpacto).setScale(4,RoundingMode.HALF_EVEN);
 			//aux para calculo de qualidade artigo
-			listaFatorImpacto.add(veiculoComunicacao.getIdVeiculo()+","+fatorImpacto);
+			listaFatorImpacto.add(veiculoComunicacao.getIdVeiculo()+";"+fatorImpacto);
 			//arredonda o valor para saida no txt
-			listaFatorImpactoBigDecimal.add(veiculoComunicacao.getIdVeiculo()+","+fatorBigDecimal);
+			listaFatorImpactoBigDecimal.add(veiculoComunicacao.getIdVeiculo()+";"+fatorBigDecimal);
 			artigoVeiculo.clear();
 		}
 	}
@@ -144,14 +144,14 @@ public class Resultado {
 					art.getIdArtigo()).size();
 			
 			for(String fator : listaFatorImpacto){
-				String[] tk = fator.split(",");
+				String[] tk = fator.split(";");
 				if(tk[0].equals(veiculoComunicacaoArt.getIdVeiculo())){
 					fatorImpacto = Double.parseDouble(tk[1]);
 				}
 			}
 			qualidadeArtigo = fatorImpacto * numVezesArtigoCitado;
 			BigDecimal qualidadeBigDecimal = new BigDecimal(qualidadeArtigo).setScale(4,RoundingMode.HALF_EVEN);
-			listaQualidadeArtigo.add(art.getIdArtigo()+","+qualidadeBigDecimal);
+			listaQualidadeArtigo.add(art.getIdArtigo()+";"+qualidadeBigDecimal);
 		}
 			
 	}
