@@ -6,12 +6,11 @@ import java.io.IOException;
 public class MainClass {
 
 	public static void main(String args[]) throws IOException {
-		
-		 String arquivoEntradaPesquisador = "testes-alunos/testes_15pesquisadores/entrada/pesquisadores.txt";
-		 String arquivoEntradaVeiculoComunicacao = "testes-alunos/testes_15pesquisadores/entrada/veiculos.txt";
-		 String arquivoEntradaArtigoCitacoes = "testes-alunos/testes_15pesquisadores/entrada/grafo_citacoes.txt";
-		 String arquivoEntradaArtigoPesquisador = "testes-alunos/testes_15pesquisadores/entrada/grafo_artigos_pesquisadores.txt";
-		 String arquivoEntradaArtigoVeiculoComunicacao = "testes-alunos/testes_15pesquisadores/entrada/artigos_veiculos.txt";
+		 String arquivoEntradaPesquisador = args[0];
+		 String arquivoEntradaVeiculoComunicacao = args[1];
+		 String arquivoEntradaArtigoCitacoes = args[2];
+		 String arquivoEntradaArtigoPesquisador = args[3];
+		 String arquivoEntradaArtigoVeiculoComunicacao = args[4];
 		 
 		 Resultado resultado = new Resultado(arquivoEntradaPesquisador,
 				 arquivoEntradaVeiculoComunicacao, arquivoEntradaArtigoCitacoes, 
