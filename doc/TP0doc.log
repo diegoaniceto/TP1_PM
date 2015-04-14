@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/Arch Linux) (preloaded format=pdflatex 2015.4.13)  14 APR 2015 10:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/Arch Linux) (preloaded format=pdflatex 2015.4.13)  14 APR 2015 11:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -568,7 +568,7 @@ File: omsaer.fd 1999/12/27
 LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 33.
 
-Underfull \hbox (badness 10000) in paragraph at lines 41--43
+Underfull \hbox (badness 10000) in paragraph at lines 42--44
 
  []
 
@@ -578,26 +578,46 @@ Underfull \hbox (badness 10000) in paragraph at lines 41--43
 <Artigo.png, id=11, 684.5575pt x 368.37625pt>
 File: Artigo.png Graphic file (type png)
  <use Artigo.png>
-Package pdftex.def Info: Artigo.png used on input line 46.
+Package pdftex.def Info: Artigo.png used on input line 47.
 (pdftex.def)             Requested size: 342.27791pt x 184.18767pt.
- [2 <./Artigo.png>] (./TP0doc.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--53
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--58
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--63
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--63
+
+ []
+
+[2 <./Artigo.png>] [3] (./TP0doc.aux) ) 
 Here is how much of TeX's memory you used:
- 4808 strings out of 493109
- 60320 string characters out of 6140856
+ 4814 strings out of 493109
+ 60371 string characters out of 6140856
  159078 words of memory out of 5000000
- 8164 multiletter control sequences out of 15000+600000
- 26887 words of font info for 58 fonts, out of 8000000 for 9000
+ 8165 multiletter control sequences out of 15000+600000
+ 30033 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,6n,24p,448b,230s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/sh
-are/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on TP0doc.pdf (2 pages, 78403 bytes).
+ 38i,6n,24p,465b,230s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr
+/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on TP0doc.pdf (3 pages, 82926 bytes).
 PDF statistics:
- 34 PDF objects out of 1000 (max. 8388607)
- 22 compressed objects within 1 object stream
+ 37 PDF objects out of 1000 (max. 8388607)
+ 24 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -38,6 +38,7 @@
 
 %% Implementação %%
 \section*{2. Implementação}
+  \subsection*{2.1. Modularização e Encapsulamento}
   Como dito na secção anterior, a implementação da solução gira em torno das entidades Pesquisador, Veiculos de Cominicação e Artigo, estas foram mapeadas através da implementação de classes Java, onde seus atributos e metódos identificam-nas. Porém, apenas elas não são o suficiente para a resolução do problema, outras classes dependentes delas são necessarias para que a solução obtivesse êxito. \\\\
   Das classes-entidades citadas acima, uma merece atenção especial, a entidade Artigo, pois ela se relaciona diretamente com as classes \textit{Veiculos de Cominicação} e \textit{Pesquisador}, além disso é preciso identificar as citações feitas nos artigos em questão. Afim de modularizar o código e facilitar seu entendimento as classes fora estruturadas da seguinte forma:
 
@@ -47,6 +48,18 @@
     \caption{Estrutura de Dependência de Artigo}
    \label{Rotulo}
   \end{figure}
+  Como pode ser visto no diagrama acima, a classe \textbf{ArtigoMainControler.java} faz o encapsulamento das demais classes, fornecendo o conjunto de todas as operações necessárias envolvendo um Artigo, não sendo necessario assim nenhuma altaração nas classes bases.\\\\
+  A modularização das entidades Pesquisador e Veiculo de Comunicação foram feitas de forma similar a classe Artigo, porém de forma mais simples pois essas classes não tem dependências de demais classes, o que facilita o reuso e a manutenção destas.
+
+  \subsection*{2.2. Conceitos OO}
+    Para a modularização e o encapsulamento das classes fossem possíveis, foi necessária a implementação dos conceitos de \textit{Orientação a Objeto}.\\\\
+    O conceito utilizado para realizar o relacionamento entre as classes foi o de \textbf{Composição} onde temos uma classe que funciona como o \textit{todo} e classes que funcionam como uma parte deste todo, por exemplo, a classe \textbf{PesquisadorControler} (responsável pela implementação dos metódos referentes a entidade Pesquisador) é o todo e a classe \textbf{Pesquisador} é parte da classe \textbf{PesquisadorControler}.
+    Foi utilizado também o conceito de Objeto, que foi utilizado para que o acesso as classes dependentes fosse possível.
+
+  \subsection*{2.3. Calculos e Execução}
+    O principal objetivo do trabalho era fornecer uma lista com a popularidade de cada pesquisador, o fator de impacto de cada veiculo de comunicação e a pontuação de cada artigo. Para resolver esses problemas, foi criada uma classe especifica que processa todos esses dados e gera os dados solicitados.\\\\
+    Esta classe é composta por objetos de todas as classes \textbf{Controler} que fornecem as operações de suas respectivas entidades, tornando possível o processamento dos dados e o fornecimento das respostas.\\\\
+    Para que a solução fosse executada, foi desenvolvida uma classe principal, \textbf{MainClass}, que contem um construtor e um objeto da classe \textbf{Resultado} que realiza os cálculos necessários pra solucionar o problema proposto.
 
 
 %% Testes %%
